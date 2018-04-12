@@ -2,15 +2,15 @@ import ballerina/http;
 import ballerina/sql;
 import ballerina/io;
 
-endpoint http:ServiceEndpoint buyerEP {
+endpoint http:Listener buyerEP {
     port:9091
 };
 
-endpoint http:SimpleClientEndpoint showallEP {
+endpoint http:SimpleClient showallEP {
     url:"http://localhost:9092/store"
 };
 
-endpoint http:SimpleClientEndpoint buyoneEP {
+endpoint http:SimpleClient buyoneEP {
     url:"http://localhost:9092/buyone"
 };
 
@@ -34,7 +34,7 @@ service<http:Service> showall bind buyerEP {
             http:Response res => {
                 // If the request was successful, an HTTP response will be returned.
                 // Here, the received response is forwarded to the client through the outbound endpoint.
-                _ = outboundEP -> forward(res);
+                _ = outboundEP -> respond(res);
             }
             http:HttpConnectorError err => {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
@@ -66,7 +66,7 @@ service<http:Service> buyone bind buyerEP {
             http:Response res => {
                 // If the request was successful, an HTTP response will be returned.
                 // Here, the received response is forwarded to the client through the outbound endpoint.
-                _ = outboundEP -> forward(res);
+                _ = outboundEP -> respond(res);
             }
             http:HttpConnectorError err => {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
