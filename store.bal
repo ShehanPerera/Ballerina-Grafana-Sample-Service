@@ -1,18 +1,18 @@
 import ballerina/http;
 import ballerina/sql;
 import ballerina/io;
+import ballerina/mysql;
 
-endpoint sql:Client testDB {
-    database:sql:DB_MYSQL,
+endpoint mysql:Client testDB {
     host:"localhost",
     port:3306,
     name:"testdb",
     username:"root",
     password:"root",
-    options:{maximumPoolSize:5}
+    poolOptions:{maximumPoolSize:5}
 };
 
-endpoint http:ServiceEndpoint storeEP {
+endpoint http:Listener storeEP {
     port:9092
 };
 
@@ -27,7 +27,7 @@ service<http:Service> adddata bind storeEP {
     }
     storeResource (endpoint outboundEP, http:Request req) {
 	
-    var ret = testDB -> update("CREATE TABLE PRODUCTS(ID INT AUTO_INCREMENT,NAME VARCHAR(255), COUNT INT,PRIMARY KEY (ID))", null);
+    var ret = testDB -> update("CREATE TABLE PRODUCTS(ID INT AUTO_INCREMENT,NAME VARCHAR(255), COUNT INT,PRIMARY KEY (ID))");
     sql:Parameter p1 = {sqlType:sql:TYPE_INTEGER, value:1};
     sql:Parameter p2 = {sqlType:sql:TYPE_VARCHAR, value:"APIM"};
     sql:Parameter p3 = {sqlType:sql:TYPE_INTEGER, value:10};
@@ -44,7 +44,7 @@ service<http:Service> adddata bind storeEP {
         int status => {
             io:println("Table creation status:" + status);
         }
-        sql:SQLConnectorError err => {
+        error err => {
 	   io:println("Error Message: "+err.message);
 	}
     }
@@ -64,7 +64,7 @@ service<http:Service> store bind storeEP {
     }
     storeResource (endpoint outboundEP, http:Request req) {
 	
-    var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null, null);
+    var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null);
     table dt = check dtReturned;
     string jsonRes;
     var j = check <json>dt;
@@ -85,16 +85,16 @@ service<http:Service> buyone bind storeEP {
     }
     storeResource (endpoint outboundEP, http:Request req) {
 	table dt;
-	var ret = testDB -> update("UPDATE PRODUCTS SET COUNT= COUNT -1 WHERE ID = 1 OR ID = 2", null);
+	var ret = testDB -> update("UPDATE PRODUCTS SET COUNT= COUNT -1 WHERE ID = 1 OR ID = 2");
     	match ret {
         int status => {
             io:println("Action status:" + status);
         }
-        sql:SQLConnectorError err => {
+        error err => {
 	io:println(err.message);
          }
     }
- 	var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null, null);
+ 	var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null);
 	dt = check dtReturned;      
  	string jsonRes;
     	var j = check <json>dt;
@@ -114,16 +114,16 @@ service<http:Service> addone bind storeEP {
     }
     storeResource (endpoint outboundEP, http:Request req) {
 	table dt;
-	var ret = testDB -> update("UPDATE PRODUCTS SET COUNT= COUNT +1 WHERE ID = 1 OR ID = 2", null);
+	var ret = testDB -> update("UPDATE PRODUCTS SET COUNT= COUNT +1 WHERE ID = 1 OR ID = 2");
     match ret {
         int status => {
             io:println("Action status:" + status);
         }
-        sql:SQLConnectorError err => {
+        error err => {
 	io:println(err.message);
          }
     }
- 	var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null, null);
+ 	var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null);
 	dt = check dtReturned;      
  	string jsonRes;
     	var j = check <json>dt;
@@ -143,12 +143,12 @@ service<http:Service> deletedata bind storeEP {
     }
     storeResource (endpoint outboundEP, http:Request req) {
 	
-     var ret = testDB -> update("DROP TABLE PRODUCTS", null);
+     var ret = testDB -> update("DROP TABLE PRODUCTS");
     match ret {
         int status => {
             io:println("Table drop status:" + status);
         }
-        sql:SQLConnectorError err => {
+        error err => {
             io:println(err.message);
        }
     }
