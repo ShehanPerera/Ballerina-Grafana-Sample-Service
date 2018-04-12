@@ -2,20 +2,20 @@ import ballerina/http;
 import ballerina/sql;
 import ballerina/io;
 
-endpoint http:ServiceEndpoint supplyerEP {
+endpoint http:Listener supplyerEP {
     port:9093
 };
 
-endpoint http:SimpleClientEndpoint storeEP {
+endpoint http:SimpleClient storeEP {
     url:"http://localhost:9092/store"
 };
-endpoint http:SimpleClientEndpoint addEP {
+endpoint http:SimpleClient addEP {
     url:"http://localhost:9092/addone"
 };
-endpoint http:SimpleClientEndpoint adddataEP {
+endpoint http:SimpleClient adddataEP {
     url:"http://localhost:9092/adddata"
 };
-endpoint http:SimpleClientEndpoint deletedataEP {
+endpoint http:SimpleClient deletedataEP {
     url:"http://localhost:9092/deletedata"
 };
 
@@ -38,7 +38,7 @@ service<http:Service> store bind supplyerEP {
             http:Response res => {
                 // If the request was successful, an HTTP response will be returned.
                 // Here, the received response is forwarded to the client through the outbound endpoint.
-                _ = outboundEP -> forward(res);
+                _ = outboundEP -> respond(res);
             }
             http:HttpConnectorError err => {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
@@ -69,7 +69,7 @@ service<http:Service> addone bind supplyerEP {
             http:Response res => {
                 // If the request was successful, an HTTP response will be returned.
                 // Here, the received response is forwarded to the client through the outbound endpoint.
-                _ = outboundEP -> forward(res);
+                _ = outboundEP -> respond(res);
             }
             http:HttpConnectorError err => {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
@@ -101,7 +101,7 @@ service<http:Service> adddata bind supplyerEP {
             http:Response res => {
                 // If the request was successful, an HTTP response will be returned.
                 // Here, the received response is forwarded to the client through the outbound endpoint.
-                _ = outboundEP -> forward(res);
+                _ = outboundEP -> respond(res);
             }
             http:HttpConnectorError err => {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
@@ -132,7 +132,7 @@ service<http:Service> deletedata bind supplyerEP {
             http:Response res => {
                 // If the request was successful, an HTTP response will be returned.
                 // Here, the received response is forwarded to the client through the outbound endpoint.
-                _ = outboundEP -> forward(res);
+                _ = outboundEP -> respond(res);
             }
             http:HttpConnectorError err => {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
