@@ -6,7 +6,7 @@ endpoint http:Listener buyerEP {
     port:9091
 };
 
-endpoint http:SimpleClient showallEP {
+endpoint http:SimpleClient storeEP {
     url:"http://localhost:9092/store"
 };
 
@@ -15,7 +15,7 @@ endpoint http:SimpleClient buyoneEP {
 };
 
 @Description {value:"Sample service for view all data."}
-service<http:Service> showall bind buyerEP {
+service<http:Service> store bind buyerEP {
 
     @Description {value:"The passthrough resource allows all HTTP methods since the resource configuration does not explicitly specify which HTTP methods are allowed."}
     @http:ResourceConfig {
@@ -25,7 +25,7 @@ service<http:Service> showall bind buyerEP {
         // Calling forward() on the backend client endpoint forwards the request the passthrough resource received to the backend.
         // When forwarding, the request is made using the same HTTP method used to invoke the passthrough resource.
         // The forward() function returns the response from the backend if there weren't any errors.
-        var clientResponse = showallEP -> forward("/", req);
+        var clientResponse = storeEP -> forward("/", req);
 
 
 
