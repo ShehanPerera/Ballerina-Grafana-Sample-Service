@@ -43,8 +43,7 @@
    ` ./grafana-server web`
 
 7. Import Ballerina Metrics Dashboards to Grafana.
-
-8.Run following sample codes for use ballerina service.
+8. Run following sample codes for use ballerina service.
 
 This sample uses MySQL DB and before running the sample copy the  MySQL JDBC driver to the BALLERINA_HOME/bre/lib folder and create a database called testdb.
 
