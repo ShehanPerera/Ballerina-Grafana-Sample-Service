@@ -26,18 +26,18 @@ service<http:Service> adddata bind storeEP {
         path:"/"
     }
     storeResource (endpoint outboundEP, http:Request req) {
-	
+
     var ret = testDB -> update("CREATE TABLE PRODUCTS(ID INT AUTO_INCREMENT,NAME VARCHAR(255), COUNT INT,PRIMARY KEY (ID))");
     sql:Parameter p1 = {sqlType:sql:TYPE_INTEGER, value:1};
     sql:Parameter p2 = {sqlType:sql:TYPE_VARCHAR, value:"APIM"};
     sql:Parameter p3 = {sqlType:sql:TYPE_INTEGER, value:10};
-   
     sql:Parameter[] item1 = [p1, p2,p3];
+
     sql:Parameter p4 = {sqlType:sql:TYPE_INTEGER, value:2};
     sql:Parameter p5 = {sqlType:sql:TYPE_VARCHAR, value:"IS"};
     sql:Parameter p6 = {sqlType:sql:TYPE_INTEGER, value:20};
-   
     sql:Parameter[] item2 = [p4, p5,p6];
+
     sql:Parameter[][] bPara = [item1, item2];
     var insertVal = testDB -> batchUpdate("INSERT INTO PRODUCTS (ID,NAME,COUNT) VALUES (?, ?, ?)", bPara);
    	match ret {
