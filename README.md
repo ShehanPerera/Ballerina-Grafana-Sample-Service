@@ -1,6 +1,7 @@
 # Ballerina-Grafana-Sample-Service
 
-Dashboard Screenshots 
+<b>Dashboard Screenshots</b> 
+
 Ballerina Http Metrics
 ![screenshot from 2018-04-16 10-11-44](https://user-images.githubusercontent.com/29086284/38790525-8422efca-415f-11e8-9461-71ebfdcf9e49.png)
 
