@@ -1,5 +1,65 @@
 # Ballerina-Grafana-Sample-Service
 
+<b>How to use the sample</b>
+
+1.Download the sample service
+
+2.Create a ballerina.conf file adding following lines in ballerina path.
+   
+  
+     [observability]
+     
+     [observability.metrics]
+     enabled=true
+   
+     [observability.metrics.prometheus]
+     enabled=true
+     port=9797
+     
+
+3. Run all the services using following commands.
+
+           ./ballerina run buyer.bal
+           ./ballerina run store.bal
+           ./ballerina run supplier.bal
+          
+4. Check your Prometheus ports for services. (normally one of the get localhost: 9797, other 2 will print in the terminal). Add ballerina job to prometheus.yml file as follows.
+
+ `  scrape_configs:`
+          
+          - job_name: ballerina
+       static_configs:
+      - targets: ['localhost:9797']
+      - targets: ['localhost:33425']
+      - targets: ['localhost:38665']`
+
+      
+5. Run Prometheus
+
+    `./prometheus --config.file=prometheus.yml`
+
+6. Run Grafana (in bin/)
+
+   ` ./grafana-server web`
+
+7. Import Ballerina Metrics Dashboards to Grafana.
+8. Run following sample codes for use ballerina service.
+
+This sample uses MySQL DB and before running the sample copy the  MySQL JDBC driver to the BALLERINA_HOME/bre/lib folder and create a database called testdb.
+
+`curl http://localhost:9093/addadata` - To add PRODUCTS table to testdb.
+
+`curl http://localhost:9093/store `-To see data in the table.
+
+`curl http://localhost:9093/addone` -To increase all products count by one.
+
+`curl http://localhost:9091/store` - To get data as a buyer.
+
+`curl http://localhost:9091/buyone` -To decrease all products count by one.
+
+`curl http://localhost:9093/deletedata ` -To drop PRODUCTS table.
+
+
 <b>Dashboard Screenshots</b> 
 
 Ballerina Http Metrics
