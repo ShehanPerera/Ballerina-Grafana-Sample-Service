@@ -27,22 +27,27 @@ service<http:Service> adddata bind storeEP {
     }
     storeResource (endpoint outboundEP, http:Request req) {
 
-    var ret = testDB -> update("CREATE TABLE PRODUCTS(ID INT AUTO_INCREMENT,NAME VARCHAR(255), COUNT INT,PRIMARY KEY (ID))");
-    sql:Parameter p1 = {sqlType:sql:TYPE_INTEGER, value:1};
-    sql:Parameter p2 = {sqlType:sql:TYPE_VARCHAR, value:"APIM"};
-    sql:Parameter p3 = {sqlType:sql:TYPE_INTEGER, value:10};
-    sql:Parameter[] item1 = [p1, p2,p3];
+    var ret = testDB -> update("CREATE TABLE PRODUCTS(ID INT ,NAME VARCHAR(255), COUNT INT,PRIMARY KEY (ID))");
+    sql:Parameter p1 = (sql:TYPE_INTEGER, 1, sql:DIRECTION_IN);
+    sql:Parameter p2 = (sql:TYPE_VARCHAR, "APIM", sql:DIRECTION_IN);
+    sql:Parameter p3 = (sql:TYPE_INTEGER, 10, sql:DIRECTION_IN);
+    var insertVal1 = testDB -> update("INSERT INTO PRODUCTS (ID,NAME,COUNT) VALUES (?, ?, ?)",p1, p2, p3);
+    match ret {
+    int status => {
+           io:println("Insert status:" + status);
+    }
+    error err => {
+           io:println("Error Message: "+err.message);
+    }
+    }
 
-    sql:Parameter p4 = {sqlType:sql:TYPE_INTEGER, value:2};
-    sql:Parameter p5 = {sqlType:sql:TYPE_VARCHAR, value:"IS"};
-    sql:Parameter p6 = {sqlType:sql:TYPE_INTEGER, value:20};
-    sql:Parameter[] item2 = [p4, p5,p6];
-
-    sql:Parameter[][] bPara = [item1, item2];
-    var insertVal = testDB -> batchUpdate("INSERT INTO PRODUCTS (ID,NAME,COUNT) VALUES (?, ?, ?)", bPara);
+    sql:Parameter p4 = (sql:TYPE_INTEGER, 2, sql:DIRECTION_IN);
+    sql:Parameter p5 = (sql:TYPE_VARCHAR, "IS", sql:DIRECTION_IN);
+    sql:Parameter p6 = (sql:TYPE_INTEGER, 20, sql:DIRECTION_IN);
+    var insertVal2 = testDB -> update("INSERT INTO PRODUCTS (ID,NAME,COUNT) VALUES (?, ?, ?)", p4,p5,p6);
    	match ret {
         int status => {
-            io:println("Table creation status:" + status);
+            io:println("Insert status:" + status);
         }
         error err => {
 	   io:println("Error Message: "+err.message);
@@ -88,7 +93,7 @@ service<http:Service> buyone bind storeEP {
 	var ret = testDB -> update("UPDATE PRODUCTS SET COUNT= COUNT -1 WHERE ID = 1 OR ID = 2");
     	match ret {
         int status => {
-            io:println("Action status:" + status);
+            io:println("Update status:" + status);
         }
         error err => {
 	io:println(err.message);
@@ -117,7 +122,7 @@ service<http:Service> addone bind storeEP {
 	var ret = testDB -> update("UPDATE PRODUCTS SET COUNT= COUNT +1 WHERE ID = 1 OR ID = 2");
     match ret {
         int status => {
-            io:println("Action status:" + status);
+            io:println("Update status:" + status);
         }
         error err => {
 	io:println(err.message);
