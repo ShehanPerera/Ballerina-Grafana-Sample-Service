@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1523526556761,
+  "iteration": 1523957800105,
   "links": [],
   "panels": [
     {
@@ -214,42 +214,42 @@
           "expr": "avg(ballerina_scheduler_waiting_for_response_worker_count)by(instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ballerina_scheduler_waiting_for_response_worker_count",
+          "legendFormat": "{{instance}}--ballerina_scheduler_waiting_for_response_worker_count",
           "refId": "A"
         },
         {
           "expr": "avg(ballerina_scheduler_waiting_for_lock_worker_count)by(instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ballerina_scheduler_waiting_for_lock_worker_count",
+          "legendFormat": "{{instance}}--ballerina_scheduler_waiting_for_lock_worker_count",
           "refId": "B"
         },
         {
           "expr": "avg(ballerina_scheduler_ready_worker_count)by(instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ballerina_scheduler_ready_worker_count",
+          "legendFormat": "{{instance}}--ballerina_scheduler_ready_worker_count",
           "refId": "C"
         },
         {
           "expr": "avg(ballerina_scheduler_running_worker_count)by(instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ballerina_scheduler_running_worker_count",
+          "legendFormat": "{{instance}}--ballerina_scheduler_running_worker_count",
           "refId": "D"
         },
         {
           "expr": "avg(ballerina_scheduler_paused_worker_count)by(instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ballerina_scheduler_paused_worker_count",
+          "legendFormat": "{{instance}}--ballerina_scheduler_paused_worker_count",
           "refId": "E"
         },
         {
           "expr": "avg(ballerina_scheduler_excepted_worker_count)by(instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "ballerina_scheduler_excepted_worker_count",
+          "legendFormat": "{{instance}}--ballerina_scheduler_excepted_worker_count",
           "refId": "F"
         }
       ],
@@ -350,5 +350,5 @@
   "timezone": "",
   "title": "Ballerina System Metrics",
   "uid": "8FPN-nmik",
-  "version": 40
+  "version": 67
 }
