@@ -72,8 +72,8 @@ service<http:Service> store bind storeEP {
     var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null);
     table dt = check dtReturned;
     string jsonRes;
-    var j = check <json>dt;
-    jsonRes = j.toString() but {() => ""};
+    json j = check <json>dt;
+    jsonRes = j.toString();
     http:Response res = new;
     res.setStringPayload(jsonRes);
      _ = outboundEP -> respond(res);
@@ -102,8 +102,8 @@ service<http:Service> buyone bind storeEP {
  	var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null);
 	dt = check dtReturned;      
  	string jsonRes;
-    	var j = check <json>dt;
-    	jsonRes = j.toString() but {() => ""};
+    	json j = check <json>dt;
+    	jsonRes = j.toString();
         http:Response res = new;
         res.setStringPayload(jsonRes);
         _ = outboundEP -> respond(res);
@@ -131,8 +131,8 @@ service<http:Service> addone bind storeEP {
  	var dtReturned = testDB -> select("SELECT * FROM PRODUCTS", null);
 	dt = check dtReturned;      
  	string jsonRes;
-    	var j = check <json>dt;
-    	jsonRes = j.toString() but {() => ""};
+    	json j = check <json>dt;
+    	jsonRes = j.toString();
         http:Response res = new;
         res.setStringPayload(jsonRes);
         _ = outboundEP -> respond(res);
