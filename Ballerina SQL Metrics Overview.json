@@ -99,7 +99,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(ballerina_sql:SQLClient_response_time_seconds)by(action)",
+          "expr": "avg(ballerina_sql:CallerActions_response_time_seconds)by(action)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -181,7 +181,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(ballerina_sql:SQLClient_response_time_seconds)by(instance)",
+          "expr": "avg(ballerina_sql:CallerActions_response_time_seconds)by(instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -263,7 +263,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(ballerina_sql:SQLClient_response_time_seconds)by(db_statement)",
+          "expr": "avg(ballerina_sql:CallerActions_response_time_seconds)by(db_statement)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -347,5 +347,5 @@
   "timezone": "",
   "title": "Ballerina SQL Metrics Overview",
   "uid": "8FPN-nmik",
-  "version": 49
+  "version": 93
 }
