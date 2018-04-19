@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1524025950657,
+  "iteration": 1524140485961,
   "links": [],
   "panels": [
     {
@@ -88,24 +88,24 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(ballerina_sql:SQLClient_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[1m])",
+          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[1m])",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}--{{action}}--{{job}}--{{db_statement}}--1m",
+          "legendFormat": "",
           "refId": "A"
         },
         {
-          "expr": "rate(ballerina_sql:SQLClient_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[5m])",
+          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[5m])",
           "format": "time_series",
-          "hide": false,
+          "hide": true,
           "intervalFactor": 1,
           "legendFormat": "{{instance}}--{{action}}--{{job}}--{{db_statement}}--5m",
           "refId": "B"
         },
         {
-          "expr": "rate(ballerina_sql:SQLClient_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[15m])",
+          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[15m])",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -188,7 +188,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "ballerina_sql:SQLClient_response_time_seconds{action=~\"$dbaction\",instance=~\"$instance\",db_statement=~\"$dbstatement\"}",
+          "expr": "ballerina_sql:CallerActions_response_time_seconds{action=~\"$dbaction\",instance=~\"$instance\",db_statement=~\"$dbstatement\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{instance}}--{{action}}--{{db_statement}}--{{quantile}}",
@@ -270,7 +270,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(ballerina_sql:SQLClient_response_time_seconds{action=~\"$dbaction\",instance=~\"$instance\",db_statement=~\"$dbstatement\"})without(quantile)",
+          "expr": "avg(ballerina_sql:CallerActions_response_time_seconds{action=~\"$dbaction\",instance=~\"$instance\",db_statement=~\"$dbstatement\"})without(quantile)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{instance}}--{{action}}--{{db_statement}}",
@@ -350,7 +350,7 @@
         "multi": true,
         "name": "dbaction",
         "options": [],
-        "query": "label_values(ballerina_sql:SQLClient_response_time_seconds, action)",
+        "query": "label_values(ballerina_sql:CallerActions_requests_total, action)",
         "refresh": 1,
         "regex": "",
         "sort": 0,
@@ -370,7 +370,7 @@
         "multi": true,
         "name": "dbstatement",
         "options": [],
-        "query": "label_values(ballerina_sql:SQLClient_response_time_seconds,db_statement)",
+        "query": "label_values(ballerina_sql:CallerActions_requests_total,db_statement)",
         "refresh": 1,
         "regex": "",
         "sort": 0,
@@ -414,5 +414,5 @@
   "timezone": "",
   "title": "Ballerina SQL Metrics",
   "uid": "8FPN-nmik",
-  "version": 70
+  "version": 92
 }
