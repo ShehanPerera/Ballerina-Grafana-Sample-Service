@@ -109,7 +109,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Average SQL Response Time by Action",
+      "title": "Average SQL Response Time by Actions",
       "tooltip": {
         "shared": true,
         "sort": 0,
