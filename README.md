@@ -7,31 +7,29 @@
 2.Create a ballerina.conf file adding following lines in ballerina path.
    
   
-     [observability]
-     
-     [observability.metrics]
+     [b7a.observability.metrics]
      enabled=true
-   
-     [observability.metrics.prometheus]
-     enabled=true
-     port=9797
-     
 
-3. Run all the services using following commands.
+     [b7a.observability.metrics.prometheus]
+     port=9797
+     [use 9798,9799 or any port you wish]
+
+3. Run all the services using following commands.You have to use 3 different ballerina,ballerina.conf for this .
 
            ./ballerina run buyer.bal
            ./ballerina run store.bal
            ./ballerina run supplier.bal
           
-4. Check your Prometheus ports for services. (normally one of the get localhost: 9797, other 2 will print in the terminal). Add ballerina job to prometheus.yml file as follows.
+4. Check your Prometheus ports for services. (normally one of the get localhost: 9797, you can set other 2 as you need).
+ Add ballerina job to prometheus.yml file as follows.
 
  `  scrape_configs:`
           
           - job_name: ballerina
        static_configs:
       - targets: ['localhost:9797']
-      - targets: ['localhost:33425']
-      - targets: ['localhost:38665']`
+      - targets: ['localhost:9798']
+      - targets: ['localhost:9799']`
 
       
 5. Run Prometheus
