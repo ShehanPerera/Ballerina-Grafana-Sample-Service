@@ -6,16 +6,16 @@ endpoint http:Listener supplyerEP {
     port:9093
 };
 
-endpoint http:SimpleClient storeEP {
+endpoint http:Client storeEP {
     url:"http://localhost:9092/store"
 };
-endpoint http:SimpleClient addEP {
+endpoint http:Client addEP {
     url:"http://localhost:9092/addone"
 };
-endpoint http:SimpleClient adddataEP {
+endpoint http:Client adddataEP {
     url:"http://localhost:9092/adddata"
 };
-endpoint http:SimpleClient deletedataEP {
+endpoint http:Client deletedataEP {
     url:"http://localhost:9092/deletedata"
 };
 
@@ -44,7 +44,7 @@ service<http:Service> store bind supplyerEP {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
                 http:Response res = new;
                 res.statusCode = 500;
-                res.setStringPayload(err.message);
+                res.setPayload(err.message);
                 _ = outboundEP -> respond(res);
             }
         }
@@ -75,7 +75,7 @@ service<http:Service> addone bind supplyerEP {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
                 http:Response res = new;
                 res.statusCode = 500;
-                res.setStringPayload(err.message);
+                res.setPayload(err.message);
                 _ = outboundEP -> respond(res);
             }
         }
@@ -107,7 +107,7 @@ service<http:Service> adddata bind supplyerEP {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
                 http:Response res = new;
                 res.statusCode = 500;
-                res.setStringPayload(err.message);
+                res.setPayload(err.message);
                 _ = outboundEP -> respond(res);
             }
         }
@@ -138,7 +138,7 @@ service<http:Service> deletedata bind supplyerEP {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
                 http:Response res = new;
                 res.statusCode = 500;
-                res.setStringPayload(err.message);
+                res.setPayload(err.message);
                 _ = outboundEP -> respond(res);
             }
         }
