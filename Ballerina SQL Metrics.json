@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1524140485961,
+  "iteration": 1524571594347,
   "links": [],
   "panels": [
     {
@@ -88,24 +88,24 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[1m])",
+          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"\n,db_instance=~\"$dbinstance\",peer_address=~\"$peeraddress\"}[1m])",
           "format": "time_series",
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "{{instance}}--{{action}}--{{job}}--{{db_statement}}--1m",
           "refId": "A"
         },
         {
-          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[5m])",
+          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"\n,db_instance=~\"$dbinstance\",peer_address=~\"$peeraddress\"}[5m])",
           "format": "time_series",
-          "hide": true,
+          "hide": false,
           "intervalFactor": 1,
           "legendFormat": "{{instance}}--{{action}}--{{job}}--{{db_statement}}--5m",
           "refId": "B"
         },
         {
-          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"}[15m])",
+          "expr": "rate(ballerina_sql:CallerActions_requests_total{instance=~\"$instance\",action=~\"$dbaction\",db_statement=~\"$dbstatement\"\n,db_instance=~\"$dbinstance\",peer_address=~\"$peeraddress\"}[15m])",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -132,8 +132,8 @@
       },
       "yaxes": [
         {
-          "format": "s",
-          "label": "Time(s)",
+          "format": "ops",
+          "label": "ops/sec",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -379,6 +379,46 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "peer-address",
+        "multi": true,
+        "name": "peeraddress",
+        "options": [],
+        "query": "label_values(ballerina_sql:CallerActions_requests_total,peer_address)",
+        "refresh": 2,
+        "regex": "",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "db-instance",
+        "multi": true,
+        "name": "dbinstance",
+        "options": [],
+        "query": "label_values(ballerina_sql:CallerActions_requests_total,db_instance)",
+        "refresh": 2,
+        "regex": "",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -414,5 +454,5 @@
   "timezone": "",
   "title": "Ballerina SQL Metrics",
   "uid": "8FPN-nmik",
-  "version": 92
+  "version": 118
 }
