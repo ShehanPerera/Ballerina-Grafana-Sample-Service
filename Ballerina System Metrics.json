@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1524117338907,
+  "iteration": 1524571850155,
   "links": [],
   "panels": [
     {
@@ -265,123 +265,6 @@
           "show": false
         }
       ]
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "${DS_PROMETHEUS}",
-      "fill": 1,
-      "gridPos": {
-        "h": 12,
-        "w": 12,
-        "x": 12,
-        "y": 4
-      },
-      "id": 73,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "avg(ballerina_scheduler_waiting_for_response_worker_count)by(instance)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{instance}}--ballerina_scheduler_waiting_for_response_worker_count",
-          "refId": "A"
-        },
-        {
-          "expr": "avg(ballerina_scheduler_waiting_for_lock_worker_count)by(instance)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{instance}}--ballerina_scheduler_waiting_for_lock_worker_count",
-          "refId": "B"
-        },
-        {
-          "expr": "avg(ballerina_scheduler_ready_worker_count)by(instance)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{instance}}--ballerina_scheduler_ready_worker_count",
-          "refId": "C"
-        },
-        {
-          "expr": "avg(ballerina_scheduler_running_worker_count)by(instance)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{instance}}--ballerina_scheduler_running_worker_count",
-          "refId": "D"
-        },
-        {
-          "expr": "avg(ballerina_scheduler_paused_worker_count)by(instance)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{instance}}--ballerina_scheduler_paused_worker_count",
-          "refId": "E"
-        },
-        {
-          "expr": "avg(ballerina_scheduler_excepted_worker_count)by(instance)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "{{instance}}--ballerina_scheduler_excepted_worker_count",
-          "refId": "F"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Average Ballerina Scheduler Count by Instance",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": "Numbers",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ]
     }
   ],
   "refresh": "10s",
@@ -444,5 +327,5 @@
   "timezone": "",
   "title": "Ballerina System Metrics",
   "uid": "8FPN-nmik",
-  "version": 83
+  "version": 119
 }
