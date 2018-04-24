@@ -6,11 +6,11 @@ endpoint http:Listener buyerEP {
     port:9091
 };
 
-endpoint http:SimpleClient storeEP {
+endpoint http:Client storeEP {
     url:"http://localhost:9092/store"
 };
 
-endpoint http:SimpleClient buyoneEP {
+endpoint http:Client buyoneEP {
     url:"http://localhost:9092/buyone"
 };
 
@@ -40,7 +40,7 @@ service<http:Service> store bind buyerEP {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
                 http:Response res = new;
                 res.statusCode = 500;
-                res.setStringPayload(err.message);
+                res.setPayload(err.message);
                 _ = outboundEP -> respond(res);
             }
         }
@@ -72,7 +72,7 @@ service<http:Service> buyone bind buyerEP {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
                 http:Response res = new;
                 res.statusCode = 500;
-                res.setStringPayload(err.message);
+                res.setPayload(err.message);
                 _ = outboundEP -> respond(res);
             }
         }
