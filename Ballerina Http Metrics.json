@@ -46,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1524127112343,
+  "iteration": 1524571298393,
   "links": [],
   "panels": [
     {
@@ -152,7 +152,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 1
+            "y": 5
           },
           "id": 6,
           "legend": {
@@ -223,8 +223,8 @@
           },
           "yaxes": [
             {
-              "format": "s",
-              "label": "Time(s)",
+              "format": "ops",
+              "label": "ops / sec",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -252,7 +252,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 1
+            "y": 5
           },
           "id": 2,
           "legend": {
@@ -323,89 +323,6 @@
               "show": false
             }
           ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "prometheus",
-          "description": "Average of http response time",
-          "fill": 1,
-          "gridPos": {
-            "h": 9,
-            "w": 12,
-            "x": 0,
-            "y": 10
-          },
-          "id": 4,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "avg(http_response_time_seconds{instance=~\"$instance\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",protocol=~\"$protocol\",resource=~\"$resource\",service=~\"$service\"})without(quantile)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "{{instance}}--{{http_method}}--{{http_url}}--{{protocol}}--{{resource}}--{{service}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Response Time Statistic",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "label": "Time(s)",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
         }
       ],
       "repeat": null,
@@ -419,286 +336,6 @@
         "w": 24,
         "x": 0,
         "y": 5
-      },
-      "id": 18,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "prometheus",
-          "description": "Client response time throughput",
-          "fill": 1,
-          "gridPos": {
-            "h": 9,
-            "w": 12,
-            "x": 0,
-            "y": 2
-          },
-          "id": 20,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum without(http_status_code)(rate(ballerina_http:HttpCachingClient_requests_total{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"}[1m]))",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}--1m",
-              "refId": "A"
-            },
-            {
-              "expr": "sum without(http_status_code)(rate(ballerina_http:HttpCachingClient_requests_total{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"}[5m]))",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}--5m",
-              "refId": "B"
-            },
-            {
-              "expr": "sum without(http_status_code)(rate(ballerina_http:HttpCachingClient_requests_total{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"}[15m]))",
-              "format": "time_series",
-              "hide": false,
-              "intervalFactor": 1,
-              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}--15m",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Ballerina Client Throughtput",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "label": "Time(s)",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "prometheus",
-          "description": "Client response time",
-          "fill": 1,
-          "gridPos": {
-            "h": 9,
-            "w": 12,
-            "x": 12,
-            "y": 2
-          },
-          "id": 24,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum without(http_status_code)(ballerina_http:HttpCachingClient_response_time_seconds{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"})",
-              "format": "time_series",
-              "hide": false,
-              "interval": "",
-              "intervalFactor": 1,
-              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}--{{quantile}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Ballerina Client Response Time",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "label": "Time(s)",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "prometheus",
-          "description": "Average of client response time",
-          "fill": 1,
-          "gridPos": {
-            "h": 9,
-            "w": 12,
-            "x": 0,
-            "y": 11
-          },
-          "id": 22,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "avg(ballerina_http:HttpCachingClient_response_time_seconds{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"})without(quantile,http_status_code)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Ballerina Http Client Response Time Statistic",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "s",
-              "label": "Time(s)",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
-            }
-          ]
-        }
-      ],
-      "title": "Ballerina Http Client Metrics",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 6
       },
       "id": 33,
       "panels": [
@@ -714,7 +351,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 3
+            "y": 15
           },
           "id": 34,
           "legend": {
@@ -814,7 +451,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 3
+            "y": 15
           },
           "id": 36,
           "legend": {
@@ -914,7 +551,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 12
+            "y": 24
           },
           "id": 35,
           "legend": {
@@ -1014,7 +651,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 12
+            "y": 24
           },
           "id": 38,
           "legend": {
@@ -1114,7 +751,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 21
+            "y": 33
           },
           "id": 37,
           "legend": {
@@ -1204,6 +841,203 @@
         }
       ],
       "title": "Ballerina Http Status Code Rate",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 18,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "description": "Client response time throughput",
+          "fill": 1,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 16
+          },
+          "id": 20,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum without(http_status_code)(rate(ballerina_http:HttpCachingClient_requests_total{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"}[1m]))",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 1,
+              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}--1m",
+              "refId": "A"
+            },
+            {
+              "expr": "sum without(http_status_code)(rate(ballerina_http:HttpCachingClient_requests_total{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"}[5m]))",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 1,
+              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}--5m",
+              "refId": "B"
+            },
+            {
+              "expr": "sum without(http_status_code)(rate(ballerina_http:HttpCachingClient_requests_total{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"}[15m]))",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 1,
+              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}--15m",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Ballerina Client Throughtput",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "ops",
+              "label": "Ops/sec",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "description": "Client response time",
+          "fill": 1,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 16
+          },
+          "id": 24,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum without(http_status_code)(ballerina_http:HttpCachingClient_response_time_seconds{action=~\"$clientaction\",http_method=~\"$httpmethod\",http_url=~\"$httpurl\",instance=~\"$instance\",peer_hostname=~\"$peerhostname\",\npeer_port=~\"$peerport\"})",
+              "format": "time_series",
+              "hide": false,
+              "interval": "",
+              "intervalFactor": 1,
+              "legendFormat": "{{instance}}--{{action}}--{{http_method}}--{{http_url}}--{{peer_hostname}}--{{peer_port}}--{{quantile}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Ballerina Client Response Time",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "s",
+              "label": "Time(s)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ]
+        }
+      ],
+      "title": "Ballerina Http Client Metrics",
       "type": "row"
     },
     {
@@ -1961,5 +1795,5 @@
   "timezone": "",
   "title": "Ballerina Http Metrics",
   "uid": "8FPN-nmik",
-  "version": 88
+  "version": 117
 }
