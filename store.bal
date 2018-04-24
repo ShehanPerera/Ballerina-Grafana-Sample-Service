@@ -54,7 +54,7 @@ service<http:Service> adddata bind storeEP {
 	}
     }
 	http:Response res = new;
-        res.setStringPayload("Data Added");
+        res.setPayload("Data Added");
         _ = outboundEP -> respond(res);
      }
 }
@@ -75,7 +75,7 @@ service<http:Service> store bind storeEP {
     json j = check <json>dt;
     jsonRes = j.toString();
     http:Response res = new;
-    res.setStringPayload(jsonRes);
+    res.setPayload(jsonRes);
      _ = outboundEP -> respond(res);
     }
 }
@@ -105,7 +105,7 @@ service<http:Service> buyone bind storeEP {
     	json j = check <json>dt;
     	jsonRes = j.toString();
         http:Response res = new;
-        res.setStringPayload(jsonRes);
+        res.setPayload(jsonRes);
         _ = outboundEP -> respond(res);
     }
 }
@@ -134,7 +134,7 @@ service<http:Service> addone bind storeEP {
     	json j = check <json>dt;
     	jsonRes = j.toString();
         http:Response res = new;
-        res.setStringPayload(jsonRes);
+        res.setPayload(jsonRes);
         _ = outboundEP -> respond(res);
     }
 }
@@ -158,7 +158,7 @@ service<http:Service> deletedata bind storeEP {
        }
     }
 	http:Response res = new;
-        res.setStringPayload("Data Deleted");
+        res.setPayload("Data Deleted");
         _ = outboundEP -> respond(res);
      }
 }
