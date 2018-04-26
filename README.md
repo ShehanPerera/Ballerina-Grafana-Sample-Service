@@ -23,13 +23,13 @@
 4. Check your Prometheus ports for services. (normally one of the get localhost: 9797, you can set other 2 as you need).
  Add ballerina job to prometheus.yml file as follows.
 
- `  scrape_configs:`
-          
+ ``` scrape_configs:
           - job_name: ballerina
        static_configs:
       - targets: ['localhost:9797']
       - targets: ['localhost:9798']
-      - targets: ['localhost:9799']`
+      - targets: ['localhost:9799']
+```      
 
       
 5. Run Prometheus
