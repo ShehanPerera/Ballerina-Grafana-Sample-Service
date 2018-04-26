@@ -36,7 +36,7 @@ service<http:Service> store bind buyerEP {
                 // Here, the received response is forwarded to the client through the outbound endpoint.
                 _ = outboundEP -> respond(res);
             }
-            http:HttpConnectorError err => {
+            error err => {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
                 http:Response res = new;
                 res.statusCode = 500;
@@ -68,7 +68,7 @@ service<http:Service> buyone bind buyerEP {
                 // Here, the received response is forwarded to the client through the outbound endpoint.
                 _ = outboundEP -> respond(res);
             }
-            http:HttpConnectorError err => {
+            error err => {
                 // If there was an error, it is used to construct a 500 response and this is sent back to the client.
                 http:Response res = new;
                 res.statusCode = 500;
