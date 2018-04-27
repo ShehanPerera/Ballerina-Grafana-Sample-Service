@@ -1,8 +1,13 @@
 # Ballerina-Grafana-Sample-Service
 
+
+![screenshot from 2018-04-27 09-45-10](https://user-images.githubusercontent.com/29086284/39344523-9813d6bc-4a00-11e8-8a66-69a8968b10be.png)
+                                                          
 <b>How to use the sample</b>
 
 1.Download the sample service
+
+`git clone https://github.com/ShehanPerera/Ballerina-Grafana-Sample-Service.git`
 
 2.Create a ballerina.conf file adding following lines in ballerina path.
    
